@@ -1,8 +1,11 @@
 class CustomersController < ApplicationController
+
   def create
-    @customer = Customer.new(params[:customer])
+    @customer = Customer.new(customer_params)
     if @customer.save
       render :json => @customer.as_json, :status => :created
+    else
+      render :json => @customer.errors, :status => :bad_request
     end
   end
 
@@ -21,4 +24,10 @@ class CustomersController < ApplicationController
   def delete
 
   end
+
+  private
+
+    def customer_params
+      params.require(:customer).permit(:name, :postcode, :contractEndDate, :contractTier)
+    end
 end
