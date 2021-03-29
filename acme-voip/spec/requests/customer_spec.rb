@@ -1,15 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "Customers", type: :request do
+RSpec.describe CustomersController, type: :controller do
   describe "create customer" do
-    before do:
-      post :index
+    before do
+      post :create
     end
 
     it "returns correct http status code" do
       expect(response).to have_http_status(:created)
     end
-
-    
   end
 end
